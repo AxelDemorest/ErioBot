@@ -28,23 +28,23 @@ module.exports = {
 
         if (command.guildOnly && message.channel.type === 'dm') return;
 
-        if (message.channel.type === 'text') {
+        if (message.channel.type === 'GUILD_TEXT') {
             if (!message.channel.permissionsFor(message.guild.me).has(["VIEW_CHANNEL", "SEND_MESSAGES"])) return;
         }
 
-        if (command.DMOnly && message.channel.type === 'text') {
-            return message.channel.send({ embed: client.util.errorMsg(message.author.tag, "La commande ne peut être exécutée que dans les messages privés du bot.") });
+        if (command.DMOnly && message.channel.type === 'GUILD_TEXT') {
+            return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "La commande ne peut être exécutée que dans les messages privés du bot.")] });
         }
 
-        if (message.channel.type === 'text') {
+        if (message.channel.type === 'GUILD_TEXT') {
             if (command.clientPermissions) {
                 const needPerms = checkPermission(message, command.clientPermissions, message.guild.me);
-                if (needPerms) return message.channel.send({ embed: client.util.errorMsg(message.author.tag, 'Il me manque ' + needPerms) });
+                if (needPerms) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, 'Il me manque ' + needPerms) ]});
             }
 
             if (command.userPermissions) {
-                const needPerms = checkPermission(message, command.clientPermissions, message.member);
-                if (needPerms) return message.channel.send({ embed: client.util.errorMsg(message.author.tag, 'Il te manque ' + needPerms) });
+                const needPerms = checkPermission(message, command.userPermissions, message.member);
+                if (needPerms) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, 'Il te manque ' + needPerms) ]});
             }
         }
 
@@ -55,14 +55,14 @@ module.exports = {
                 reply += `\n\n\`\`\`Usage:\n\n> ${prefix}${command.name} ${command.usage}\`\`\``;
             }
 
-            return message.channel.send({ embed: client.util.errorMsg(message.author.tag, reply) });
+            return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, reply)] });
         }
 
         try {
             command.execute(client, message, args);
         } catch (error) {
             console.error(error);
-            return message.channel.send({ embed: client.util.errorMsg(message.author.tag, "J'ai rencontré une erreur lors de l'exécution de la commande.") });
+            return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "J'ai rencontré une erreur lors de l'exécution de la commande.")] });
         }
     },
 };
