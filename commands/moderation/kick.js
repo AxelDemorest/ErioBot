@@ -2,10 +2,15 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: 'kick',
-    description: 'Kick a user.',
+    description: 'Kick a user',
+    usage: '<user> [reason]',
     category: "Moderation",
     userPermissions: ['KICK_MEMBERS'],
     clientPermissions: ['EMBED_LINKS', 'KICK_MEMBERS'],
+    exemples: [
+        'kick @Cyra#5354 Bad words',
+        'kick @Cyra#5354'
+    ],
     execute(client, message, args) {
 
         const member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();

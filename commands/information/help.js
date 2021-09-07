@@ -1,8 +1,9 @@
 const { MessageEmbed } = require("discord.js");
+const templates = require("../../utils/templates")
 
 module.exports = {
     name: "help",
-    description: 'Commande d\'aide',
+    description: 'List and information about all of commands',
     category: "Information",
     clientPermissions: ['EMBED_LINKS'],
     execute(client, message, args) {
@@ -33,15 +34,16 @@ module.exports = {
             {
                 embeds: [
                     new MessageEmbed()
-                        .setColor("#3235A7")
-                        .setTitle(`${command.name} command`)
-                        .setDescription(`**╭୨୧・
-・__Alias__ ୧。${command.aliases ? command.aliases.join(', ') : "Aucun alias"}
-・__Description__ ୧。${command.description ? command.description : "Aucune description"}
-・__Usage__ ୧。${command.usage ? `\`${command.usage}\`` : "Aucun usage"}
-・__Category__ ୧。${command.category}
-╰୨୧・**`)
-                        .setFooter("<> = Obligatoire, [] = Facultatif")
+                        .setColor("#70D9F3")
+                        .setAuthor("More informations about command")
+                        .setTitle(`<a:bluearrow:884849722672685117> ${templates.capitalizeFirstLetter(command.name)} command`)
+                        .setDescription(`・**Aliases** ୧。${command.aliases ? command.aliases.join(', ') : "No aliases"}
+・**Description** ୧。${command.description ? command.description : "No description"}
+・**Usage** ୧。${command.usage ? `\`${command.usage}\`` : "No usage"}
+・**Category** ୧。${command.category} commands
+・**Permission** ୧。${command.userPermissions ? `\`${command.userPermissions}\`` : "No permission needed"}
+・**Exemples** ୧。${command.exemples ? `\n\`\`\`${command.exemples.join("\n")}\`\`\`` : "No examples"}`)
+                        .setFooter("<> = required, [] = optional・don't use when using the command.")
 
                 ]
             }

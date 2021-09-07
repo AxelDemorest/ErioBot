@@ -28,4 +28,8 @@ const successMsg = (user_tag, description) => {
     };
 }
 
-module.exports = { errorMsg, successMsg };
+const capitalizeFirstLetter = (string) =>  {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+module.exports = { errorMsg, successMsg, capitalizeFirstLetter };
