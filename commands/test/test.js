@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const ms = require("ms");
+const { Permissions } = require('discord.js');
 
 module.exports = {
     name: 'test',
@@ -7,8 +8,6 @@ module.exports = {
     category: "test",
     clientPermissions: ['EMBED_LINKS'],
     async execute(client, message, args) {
-
-        console.log(ms("zizi"))
 
         /* const result = await client.db.asyncQuery(`SELECT * FROM test`).catch(console.error);
 
