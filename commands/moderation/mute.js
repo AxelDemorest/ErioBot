@@ -6,8 +6,8 @@ module.exports = {
     description: 'Mute a user',
     category: "Moderation",
     usage: '<user> [duration] [reason]',
-    userPermissions: ['MUTE_MEMBERS'],
-    clientPermissions: ['EMBED_LINKS', 'MUTE_MEMBERS', 'MANAGE_CHANNELS'],
+    userPermissions: ['MUTE_MEMBERS', 'MANAGE_ROLES'],
+    clientPermissions: ['EMBED_LINKS', 'MUTE_MEMBERS', 'MANAGE_ROLES'],
     exemples: [
         'mute @Cyra#5354 2h Bad words',
         'mute @Cyra#5354 Bad words',
@@ -72,7 +72,7 @@ module.exports = {
             }, duration);
         }
 
-        message.channel.send({ embeds: [client.util.successMsg(message.author.tag, `${member.user.tag} was muted.`)] });
+        message.channel.send({ embeds: [client.util.successMsg(message.author.tag, `${member.user.tag} has been muted.`)] });
 
     },
 };

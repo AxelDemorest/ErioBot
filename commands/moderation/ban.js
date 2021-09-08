@@ -26,7 +26,7 @@ module.exports = {
 
         let duration = args[1] ? ms(args[1]) : null;
 
-        if(duration === undefined) {
+        if(duration === undefined || duration === null) {
 
             args = args.slice(1);
 
@@ -50,7 +50,7 @@ module.exports = {
             }, duration);
         }
 
-        message.channel.send({ embeds: [ client.util.successMsg(message.author.tag, `${member.user.tag} was banned.`) ]});
+        message.channel.send({ embeds: [ client.util.successMsg(message.author.tag, `${member.user.tag} has been banned.`) ]});
 
     },
 };
