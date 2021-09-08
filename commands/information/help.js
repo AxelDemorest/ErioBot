@@ -15,7 +15,7 @@ module.exports = {
         const embedHelp = new MessageEmbed()
             .setColor("#70D9F3")
             .setTitle("Need Help ?")
-            .setDescription(`・To obtain more information on a command, use \`${prefix}help <command>\`.`)
+            .setDescription(`・To obtain more information on about a command, use \`${prefix}help <command>\`.`)
         client.categories.filter(category => message.author.id !== "378617147858878465" ? category !== "<:pinkcrown:843967542472474624> - Propriétaire" : category).map(cat => {
             embedHelp.addField(`• ${cat}`, client.commands.filter(cmd => cmd.category === cat).map(cmd => `\`${cmd.name}\``).join(' | '))
         });

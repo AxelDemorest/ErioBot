@@ -13,6 +13,7 @@ const client = new Discord.Client({ intents: Object.values(Discord.Intents.FLAGS
 const commandFolders = fs.readdirSync("./commands"); // Il parcourt le dossier "commands" en lisant les enfants directs du dossier
 const eventFolders = fs.readdirSync("./events"); // Il parcourt le dossier "events" en lisant les enfants directs du dossier
 
+client.guildSettings = new Discord.Collection();
 client.commands = new Discord.Collection(); // On crée une nouvelle collection
 client.categories = new Array(); // on crée un tableau des catégories qui extend de client
 client.util = util;

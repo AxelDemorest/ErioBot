@@ -9,6 +9,14 @@ module.exports = {
     clientPermissions: ['EMBED_LINKS'],
     async execute(client, message, args) {
 
+        const a = undefined;
+
+        const b = "oui"
+
+        const c = a ?? b;
+
+        console.log(c);
+
         /* const result = await client.db.asyncQuery(`SELECT * FROM test`).catch(console.error);
 
         console.log(result);

@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: 'messageCreate',
-    execute(message, client) {
+    async execute(message, client) {
 
         function checkPermission(message, permissions, member) {
             const missing = message.channel.permissionsFor(member).missing(permissions);
@@ -12,7 +12,9 @@ module.exports = {
             return false;
         }
 
-        const prefix = '.';
+        const result_prefix = await client.db.asyncQuery(`SELECT prefix_guild FROM guilds WHERE guild_id = ${message.guild.id}`).catch(console.error);
+
+        const prefix = result_prefix[0].prefix_guild;
 
         const regex = message.content.match(`^<@!?881644932216025098> *|^\\${prefix}`);
 
@@ -39,12 +41,12 @@ module.exports = {
         if (message.channel.type === 'GUILD_TEXT') {
             if (command.clientPermissions) {
                 const needPerms = checkPermission(message, command.clientPermissions, message.guild.me);
-                if (needPerms) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, 'Il me manque ' + needPerms) ]});
+                if (needPerms) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, 'Il me manque ' + needPerms)] });
             }
 
             if (command.userPermissions) {
                 const needPerms = checkPermission(message, command.userPermissions, message.member);
-                if (needPerms) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, 'Il te manque ' + needPerms) ]});
+                if (needPerms) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, 'Il te manque ' + needPerms)] });
             }
         }
 
