@@ -15,17 +15,17 @@ module.exports = {
 
         const member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
 
-        if(!member) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, "User not found.") ]});
+        if(!member) return message.channel.send({ embeds: [ client.util.errorMsg(message.author, "User not found.") ]});
 
-        if (!member.kickable) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, "I can't kick this user.") ]});
+        if (!member.kickable) return message.channel.send({ embeds: [ client.util.errorMsg(message.author, "I can't kick this user.") ]});
 
-        if(message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, "You can't kick this user.") ]});
+        if(message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [ client.util.errorMsg(message.author, "You can't kick this user.") ]});
 
         args.shift();
 
         member.kick(args.join(" "))
 
-        return message.channel.send({ embeds: [ client.util.successMsg(message.author.tag, `${member.user.tag} has been kicked.`) ]});
+        return message.channel.send({ embeds: [ client.util.successMsg(message.author, `${member.user.tag} has been kicked.`) ]});
 
     },
 };

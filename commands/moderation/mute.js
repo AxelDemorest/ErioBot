@@ -18,13 +18,13 @@ module.exports = {
 
         const member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
 
-        if (!member) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "User not found.")] });
+        if (!member) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "User not found.")] });
 
-        if (message.guild.me.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "I can't mute this user.")] });
+        if (message.guild.me.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "I can't mute this user.")] });
 
-        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "You can't mute this user.")] });
+        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "You can't mute this user.")] });
 
-        if (message.member.roles.cache.some(role => role.name === 'muted')) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "This user is already muted.")] });
+        if (message.member.roles.cache.some(role => role.name === 'muted')) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "This user is already muted.")] });
 
         let muterole = message.guild.roles.cache.find(muterole => muterole.name === "muted");
 
@@ -72,7 +72,7 @@ module.exports = {
             }, duration);
         }
 
-        message.channel.send({ embeds: [client.util.successMsg(message.author.tag, `${member.user.tag} has been muted.`)] });
+        message.channel.send({ embeds: [client.util.successMsg(message.author, `${member.user.tag} has been muted.`)] });
 
     },
 };

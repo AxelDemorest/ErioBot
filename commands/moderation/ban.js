@@ -18,11 +18,11 @@ module.exports = {
 
         const member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
 
-        if(!member) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, "User not found.") ]});
+        if(!member) return message.channel.send({ embeds: [ client.util.errorMsg(message.author, "User not found.") ]});
 
-        if (!member.bannable) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, "I can't ban this user.") ]});
+        if (!member.bannable) return message.channel.send({ embeds: [ client.util.errorMsg(message.author, "I can't ban this user.") ]});
 
-        if(message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [ client.util.errorMsg(message.author.tag, "You can't ban this user.") ]});
+        if(message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [ client.util.errorMsg(message.author, "You can't ban this user.") ]});
 
         let duration = args[1] ? ms(args[1]) : null;
 
@@ -50,7 +50,7 @@ module.exports = {
             }, duration);
         }
 
-        message.channel.send({ embeds: [ client.util.successMsg(message.author.tag, `${member.user.tag} has been banned.`) ]});
+        message.channel.send({ embeds: [ client.util.successMsg(message.author, `${member.user.tag} has been banned.`) ]});
 
     },
 };

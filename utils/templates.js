@@ -1,29 +1,27 @@
-const errorMsg = (user_tag, description) => {
+const errorMsg = (user, description) => {
     return {
-        color: "#f87359",
+        color: "#70D9F3",
         author: {
-            name: "Nous avons rencontré une erreur.",
-            icon_url: "https://zupimages.net/up/21/19/hee5.png"
+            name: "We have encountered an error",
         },
-        description: `> ${description}`,
+        description: `・${description}`,
         footer: {
-            text: `Message d'erreur causé par ${user_tag}.`,
-            icon_url: 'https://zupimages.net/up/21/20/wh7n.png',
+            text: `Executed by ${user.tag}`,
+            icon_url: user.avatarURL({ dynamic: true }),
         }
     };
 }
 
-const successMsg = (user_tag, description) => {
+const successMsg = (user, description) => {
     return {
-        color: "#FE7089",
+        color: "#70D9F3",
         author: {
-            name: "Succès !",
-            icon_url: "https://zupimages.net/up/21/20/volt.png"
+            name: "Success!",
         },
-        description: `> ${description}`,
+        description: `・${description}`,
         footer: {
-            text: user_tag,
-            icon_url: 'https://zupimages.net/up/21/20/wh7n.png',
+            text: `Executed by ${user.tag}`,
+            icon_url: user.avatarURL({ dynamic: true }),
         }
     };
 }

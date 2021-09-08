@@ -6,11 +6,13 @@ module.exports = {
     description: 'List and information about all of commands',
     category: "Information",
     clientPermissions: ['EMBED_LINKS'],
-    execute(client, message, args) {
+    async execute(client, message, args) {
 
         const { commands } = client;
 
-        const prefix = '.';
+        const result_prefix = await client.db.asyncQuery(`SELECT prefix_guild FROM guilds WHERE guild_id = ${message.guild.id}`).catch(console.error);
+
+        const prefix = result_prefix[0].prefix_guild;
 
         const embedHelp = new MessageEmbed()
             .setColor("#70D9F3")
