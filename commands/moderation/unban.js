@@ -15,9 +15,9 @@ module.exports = {
         try {
             const user = await message.guild.members.unban(args[0]);
             client.db.query("DELETE FROM ban_users WHERE id_user = ?", [user.id], (error, rows) => { if (error) throw error });
-            return message.channel.send(`${user.tag} has been unbanned!`)
+            return message.channel.send({ embeds: [client.util.successMsg(message.author, `**${user.tag}** has been unbanned!`)] });
         } catch {
-            return message.channel.send("User not found or this user hasn't been banned.")
+            return message.channel.send({ embeds: [client.util.errorMsg(message.author, `User not found or this user hasn't been banned.`)] });
         }
 
     },

@@ -25,7 +25,7 @@ module.exports = {
 
         member.kick(args.join(" "))
 
-        return message.channel.send({ embeds: [ client.util.successMsg(message.author, `${member.user.tag} has been kicked.`) ]});
+        return message.channel.send({ embeds: [ client.util.successMsg(message.author, `**${member.user.tag}** has been kicked.`) ]});
 
     },
 };

@@ -50,7 +50,7 @@ module.exports = {
             }, duration);
         }
 
-        message.channel.send({ embeds: [ client.util.successMsg(message.author, `${member.user.tag} has been banned.`) ]});
+        message.channel.send({ embeds: [ client.util.successMsg(message.author, `**${member.user.tag}** has been banned.`) ]});
 
     },
 };

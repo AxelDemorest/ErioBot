@@ -24,13 +24,13 @@ module.exports = {
 
         let muterole = message.guild.roles.cache.find(muterole => muterole.name === "muted");
 
-        if (!muterole) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "No 'muted' role has been created.")] });
+        if (!muterole) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "No `muted` role has been created.")] });
 
         await member.roles.remove(muterole)
 
         client.db.query("DELETE FROM mute_users WHERE id_user = ?", [member.id], (error, rows) => { if (error) throw error });
 
-        message.channel.send({ embeds: [client.util.successMsg(message.author, `${member.user.tag} has been unmuted.`)] });
+        message.channel.send({ embeds: [client.util.successMsg(message.author, `**${member.user.tag}** has been unmuted.`)] });
 
     },
 };
