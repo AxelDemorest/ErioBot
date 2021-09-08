@@ -42,7 +42,7 @@ module.exports = {
 ・**Usage** ୧。${command.usage ? `\`${command.usage}\`` : "No usage"}
 ・**Category** ୧。${command.category} commands
 ・**Permission** ୧。${command.userPermissions ? `\`${command.userPermissions}\`` : "No permission needed"}
-・**Exemples** ୧。${command.exemples ? `\n\`\`\`${command.exemples.join("\n")}\`\`\`` : "No examples"}`)
+・**Examples** ୧。${command.exemples ? `\n\`\`\`${command.exemples.join("\n")}\`\`\`` : "No examples"}`)
                         .setFooter("<> = required, [] = optional・don't use when using the command.")
 
                 ]

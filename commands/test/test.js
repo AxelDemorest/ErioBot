@@ -8,13 +8,33 @@ module.exports = {
     clientPermissions: ['EMBED_LINKS'],
     async execute(client, message, args) {
 
+        console.log(ms("zizi"))
+
         /* const result = await client.db.asyncQuery(`SELECT * FROM test`).catch(console.error);
 
         console.log(result);
     
         message.channel.send("coucou, voici le résulat " + result[1].test); */
 
-        console.log(Date.now())
+        /* let duration = args[0] ? ms(args[0]) : null;
+
+        console.log("debut : " + duration)
+
+        if (duration === undefined || duration === null) {
+
+            console.log("undefined");
+
+        } else {
+
+            if (!isNaN(args[0])) {
+                duration = ms(`${duration}m`)
+                console.log("dans condi : " + duration)
+            } 
+            
+            if(duration < 30000) return console.log("non")
+
+            console.log("fin : " + ms(duration))
+        } */
 
     },
 };
