@@ -9,13 +9,9 @@ module.exports = {
     clientPermissions: ['EMBED_LINKS'],
     async execute(client, message, args) {
 
-        const a = undefined;
+        let test = message.guild.roles.cache.has("8845139388dd07599156");
 
-        const b = "oui"
-
-        const c = a ?? b;
-
-        console.log(c);
+        console.log(message.mentions.roles.first());
 
         /* const result = await client.db.asyncQuery(`SELECT * FROM test`).catch(console.error);
 

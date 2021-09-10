@@ -39,12 +39,12 @@ module.exports = {
                         .setColor("#70D9F3")
                         .setAuthor("More informations about command")
                         .setTitle(`<a:bluearrow:884849722672685117> ${templates.capitalizeFirstLetter(command.name)} command`)
-                        .setDescription(`・**Aliases** ୧。${command.aliases ? command.aliases.join(', ') : "No aliases"}
-・**Description** ୧。${command.description ? command.description : "No description"}
-・**Usage** ୧。${command.usage ? `\`${command.usage}\`` : "No usage"}
-・**Category** ୧。${command.category} commands
-・**Permission** ୧。${command.userPermissions ? `\`${command.userPermissions}\`` : "No permission needed"}
-・**Examples** ୧。${command.exemples ? `\n\`\`\`${command.exemples.join("\n")}\`\`\`` : "No examples"}`)
+                        .setDescription(`・**Aliases**︰${command.aliases ? command.aliases.join(', ') : "No aliases"}
+・**Description**︰${command.description ? command.description : "No description"}
+・**Usage**︰${command.usage ? `\`${command.usage}\`` : "No usage"}
+・**Category**︰${command.category} commands
+・**Permission**︰${command.userPermissions ? `\`${command.userPermissions}\`` : "No permission needed"}
+・**Examples**︰${command.exemples ? `\n\`\`\`${command.exemples.join("\n")}\`\`\`` : "No examples"}`)
                         .setFooter("<> = required, [] = optional・don't use when using the command.")
 
                 ]

@@ -14,7 +14,7 @@ module.exports = {
 
         const member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
 
-        if (!member) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "User not found.")] });
+        if (!member) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "User not found.", this.usage)] });
 
         if (message.guild.me.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "I can't mute this user.")] });
 

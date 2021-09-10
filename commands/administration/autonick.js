@@ -21,12 +21,12 @@ module.exports = {
                             .setColor("#70D9F3")
                             .setAuthor("Answer the question below")
                             .setDescription(`• ${text}`)
-                            .setFooter(footer)
+                            .setFooter(footer, message.author.avatarURL())
                     ]
                 });
 
                 try {
-                    const thisMsg = await msg.channel.awaitMessages({filter, max: 1, time: time }).catch(() => { });
+                    const thisMsg = await msg.channel.awaitMessages({ filter, max: 1, time: time }).catch(() => { });
                     if (!thisMsg || !thisMsg.first()) resolve({ content: null });
 
                     resolve(thisMsg.first());
@@ -41,11 +41,11 @@ module.exports = {
             return message.channel.send({ embeds: [client.util.successMsg(message.author, "Configuration cleared")] })
         }
 
-        const { content: pseudo } = await awaitMessage(message, (msg => msg.author.id == message.author.id && msg.content.length <= 200), 60000, 'What nickname do you want to give to newcomers ?\n\n**Variable ୧。**\n```{pseudo} : pseudo of the user```\n**Example ୧。**\n```[beautiful] - {pseudo}```', '').catch(() => { });
+        const { content: pseudo } = await awaitMessage(message, (msg => msg.author.id == message.author.id && msg.content.length <= 200), 180000, 'What nickname do you want to give to newcomers ?\n\n**Variable︰**\n```{pseudo} : pseudo of the user```\n**Example︰**\n```[beautiful] - {pseudo}```', `Executed by ${message.author.tag}・cancel to stop the command.`).catch(() => { });
         if (pseudo === "cancel") return message.channel.send({ embeds: [client.util.successMsg(message.author, "Cancelled command.")] })
         if (!pseudo) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "Time elapsed.")] })
 
-        const { content: typeUser } = await awaitMessage(message, (msg => msg.author.id == message.author.id && (["all", "bot", "user"].includes(msg.content.toLowerCase()) || msg.content.toLowerCase() === "cancel")), 60000, 'For what type of users do you want to set this nickname ?\n\n**Types ୧。**`user` | `bot` | `all`', '').catch(() => { });
+        const { content: typeUser } = await awaitMessage(message, (msg => msg.author.id == message.author.id && (["all", "bot", "user"].includes(msg.content.toLowerCase()) || msg.content.toLowerCase() === "cancel")), 180000, 'For what type of users do you want to set this nickname ?\n\n**Types︰**`user` | `bot` | `all`', `Executed by ${message.author.tag}・cancel to stop the command.`).catch(() => { });
         if (typeUser === "cancel") return message.channel.send({ embeds: [client.util.successMsg(message.author, "Cancelled command.")] })
         if (!typeUser) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "Time elapsed.")] })
 
