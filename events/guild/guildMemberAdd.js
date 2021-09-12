@@ -5,7 +5,7 @@ module.exports = {
     name: 'guildMemberAdd',
     async execute(member, client) {
 
-        if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_NICKNAMES)) {
+        if (member.guild.me.permissions.has(Permissions.FLAGS.MANAGE_NICKNAMES)) {
             const autonick = await client.db.asyncQuery(`SELECT * FROM guilds WHERE guild_id = ${member.guild.id}`).catch(console.error);
 
             if (autonick.length > 0) {
