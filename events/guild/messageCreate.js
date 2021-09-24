@@ -5,9 +5,9 @@ module.exports = {
     async execute(message, client) {
 
         function checkPermission(message, permissions, member) {
-            const missing = message.channel.permissionsFor(member).missing(permissions);
+            const missing = message.channel.permissionsFor(member).missing(permissions, false);
             if (missing.length > 0) {
-                return `la ou les permission(s) suivante(s): ${missing.map(perm => `**${perm}**`).join(', ')}`;
+                return `the following permission(s): ${missing.map(perm => `**${perm}**`).join(', ')}`;
             }
             return false;
         }
@@ -35,18 +35,18 @@ module.exports = {
         }
 
         if (command.DMOnly && message.channel.type === 'GUILD_TEXT') {
-            return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "La commande ne peut être exécutée que dans les messages privés du bot.")] });
+            return message.channel.send({ embeds: [client.util.errorMsg(message.author, "The command can only be executed in the bot's private messages.")] });
         }
 
         if (message.channel.type === 'GUILD_TEXT') {
             if (command.clientPermissions) {
                 const needPerms = checkPermission(message, command.clientPermissions, message.guild.me);
-                if (needPerms) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, 'Il me manque ' + needPerms)] });
+                if (needPerms) return message.channel.send({ embeds: [client.util.errorMsg(message.author, 'I am missing ' + needPerms)] });
             }
 
             if (command.userPermissions) {
                 const needPerms = checkPermission(message, command.userPermissions, message.member);
-                if (needPerms) return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, 'Il te manque ' + needPerms)] });
+                if (needPerms) return message.channel.send({ embeds: [client.util.errorMsg(message.author, 'You are missing ' + needPerms)] });
             }
         }
 
@@ -57,14 +57,14 @@ module.exports = {
                 reply += `\n\n\`\`\`Usage:\n\n> ${prefix}${command.name} ${command.usage}\`\`\``;
             }
 
-            return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, reply)] });
+            return message.channel.send({ embeds: [client.util.errorMsg(message.author, reply)] });
         }
 
         try {
             command.execute(client, message, args);
         } catch (error) {
             console.error(error);
-            return message.channel.send({ embeds: [client.util.errorMsg(message.author.tag, "J'ai rencontré une erreur lors de l'exécution de la commande.")] });
+            return message.channel.send({ embeds: [client.util.errorMsg(message.author, "I encountered an error when running the command.")] });
         }
     },
 };
