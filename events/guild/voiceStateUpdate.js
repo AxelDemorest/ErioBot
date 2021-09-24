@@ -29,7 +29,7 @@ module.exports = {
 
 
                 if (newState.channelId !== channel[0].voiceschannel) return;
-                const createChannel = await newState.guild.channels.create(`Channel de ${newState.member.nickname}`, {
+                const createChannel = await newState.guild.channels.create(`Channel de ${newState.member.user.username}`, {
                     type: 'GUILD_VOICE',
                     parent: voiceChannel.parentId,
                     permissionOverwrites: [
@@ -97,7 +97,7 @@ module.exports = {
                 }
 
                 if (newState.channelId === channel[0].voiceschannel) {
-                    const createChannel2 = await newState.guild.channels.create(`Channel de ${newState.member.nickname}`, {
+                    const createChannel2 = await newState.guild.channels.create(`Channel de ${newState.member.user.username}`, {
                         type: 'GUILD_VOICE',
                         parent: voiceChannel.parentId,
                         permissionOverwrites: [

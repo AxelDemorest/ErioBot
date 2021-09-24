@@ -2,8 +2,8 @@ const { MessageEmbed, Permissions } = require("discord.js");
 
 module.exports = {
     name: 'setup-voice',
-    description: '',
-    category: "Create your vocals",
+    description: 'Setup your "join to create" channel',
+    category: "Join to create",
     usage: '<prefix>',
     userPermissions: ['ADMINISTRATOR'],
     clientPermissions: ['EMBED_LINKS'],
