@@ -47,6 +47,12 @@ module.exports = {
             }
         }
 
+        const results_voicesChannel = await client.db.asyncQuery(`SELECT * FROM voices_owner`).catch(console.error);
+
+        for(const key of results_voicesChannel) {
+            client.Tempchannels.add(key.channel_id);
+        }
+
         client.user.setActivity(`.help`, { type: 'WATCHING' })
 
         console.log(chalk.cyan(`${client.user.tag} est désormais connecté !`));

@@ -14,6 +14,8 @@ const commandFolders = fs.readdirSync("./commands"); // Il parcourt le dossier "
 const eventFolders = fs.readdirSync("./events"); // Il parcourt le dossier "events" en lisant les enfants directs du dossier
 
 client.guildSettings = new Discord.Collection();
+/* client.ownerVoices = new Discord.Collection(); */
+client.Tempchannels = new Set();
 client.commands = new Discord.Collection(); // On crée une nouvelle collection
 client.categories = new Array(); // on crée un tableau des catégories qui extend de client
 client.util = util;
