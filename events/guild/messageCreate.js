@@ -9,7 +9,15 @@ module.exports = {
         // leveling system
 
         function getNeededXP(neededXP) {
-            return Math.floor((1.07 * neededXP) + 50);
+            return Math.floor((1.08 * neededXP) + 100);
+        }
+
+        function firstNeededXp(level) {
+            let result = 0;
+            for (let i = 0; i < level; i++) {
+                result = Math.floor((1.08 * result) + 100);
+            }
+            return result;
         }
 
         function generateXp() {
@@ -27,9 +35,9 @@ module.exports = {
                 } else {
                     let level = data[0].level;
                     let xp = data[0].xp + generateXpFunction;
-                    const needed = data[0].xp_needed;
+                    const needed = firstNeededXp(data[0].level);
 
-                    await client.db.query("UPDATE leveling_users SET xp = ?, xp_all = xp_all + ? WHERE guild_id = ? AND user_id = ?", [xp, generateXpFunction, message.guild.id, message.author.id], (error, rows) => { if (error) throw error });
+                    await client.db.query("UPDATE leveling_users SET xp = ?, xp_all = xp_all + ?, xp_needed = ? WHERE guild_id = ? AND user_id = ?", [xp, generateXpFunction, needed, message.guild.id, message.author.id], (error, rows) => { if (error) throw error });
 
                     if (xp >= needed) {
                         ++level;
@@ -39,7 +47,7 @@ module.exports = {
 
                         message.channel.send(`<a:a_BlueArrow:889566187925680138> **Félicitation ${message.author}, tu es passé au niveau** \`${level}\` !`);
 
-                        await client.db.query("UPDATE leveling_users SET xp = ?, xp_needed = ?, level = ? WHERE guild_id = ? AND user_id = ?", [xp, newNeeded, level, message.guild.id, message.author.id], (error, rows) => { if (error) throw error });
+                        await client.db.query("UPDATE leveling_users SET xp = ?, xp_needed = ?, level = ? WHERE guild_id = ? AND user_id = ?", [0, newNeeded, level, message.guild.id, message.author.id], (error, rows) => { if (error) throw error });
 
                     }
                 }
@@ -67,9 +75,9 @@ module.exports = {
         const regex = message.content.match(`^<@!?881644932216025098> *|^\\${prefix}`);
 
         if (!regex) {
-            
-            if(result_guild[0].leveling) manageXp(message, client);
-            
+
+            if (result_guild[0].leveling) manageXp(message, client);
+
             return;
         }
 

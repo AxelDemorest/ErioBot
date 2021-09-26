@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AxelDemorest/ErioBot#readme",
   "dependencies": {
+    "canvas": "^2.8.0",
     "chalk": "^4.1.2",
     "discord.js": "^13.1.0",
     "fs": "^0.0.1-security",
