@@ -10,6 +10,10 @@ module.exports = {
     
     async execute(client, message, args) {
 
+        const data_guild = await client.db.asyncQuery(`SELECT * FROM guilds WHERE guild_id = ${message.guild.id}`).catch(console.error);
+
+        if(!data_guild[0].leveling) return message.channel.send({ embeds: [client.util.errorMsg(message.author, "The leveling system has not been set up.")] });
+
         const applyText = (canvas, ctx, text) => {
 
             // Declare a base size of the font
@@ -24,6 +28,14 @@ module.exports = {
             // Return the result to use in the actual canvas
             return ctx.font;
         };
+
+        function firstNeededXp(level) {
+            let result = 0;
+            for (let i = 0; i <= level; i++) {
+                result = Math.floor((1.08 * result) + 100);
+            }
+            return result;
+        }
 
         const member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
         let data;

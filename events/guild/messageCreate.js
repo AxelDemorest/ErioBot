@@ -14,7 +14,7 @@ module.exports = {
 
         function firstNeededXp(level) {
             let result = 0;
-            for (let i = 0; i < level; i++) {
+            for (let i = 0; i <= level; i++) {
                 result = Math.floor((1.08 * result) + 100);
             }
             return result;
