@@ -1,18 +1,41 @@
 const { MessageEmbed } = require("discord.js");
 const ms = require("ms");
 const { Permissions } = require('discord.js');
+const moment = require("moment");
+moment.locale("fr")
 
 module.exports = {
     name: 'test',
-    description: 'Rejoindre le serveur support du bot.',
+    description: 'commande test',
     category: "test",
     clientPermissions: ['EMBED_LINKS'],
+    ownerOnly: true,
     async execute(client, message, args) {
 
-        let test = message.guild.roles.cache.has("8845139388dd07599156");
+        let result = 0;
 
-        console.log(message.mentions.roles.first());
+        for(let i=0; i<8; i++) {
+            result = Math.floor((1.08 * result) + 100);
+            console.log(result)
+        }
+            
 
+        /* const MapObject = new Map();
+
+        MapObject.set("value", ['coucou']);
+
+        const value = MapObject.get("value");
+
+        if(!value?.includes("coucou")) console.log("non")
+        else console.log("oui") */
+
+        /* console.log(value.length)
+
+        const index = value.indexOf("2")
+
+        value.splice(index, 1)
+
+        console.log(value) */
         /* const result = await client.db.asyncQuery(`SELECT * FROM test`).catch(console.error);
 
         console.log(result);

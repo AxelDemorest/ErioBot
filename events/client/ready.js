@@ -53,6 +53,8 @@ module.exports = {
             client.Tempchannels.add(key.channel_id);
         }
 
+        // faire une boucle de toutes les guilds et les ajouter dans la db si une n'y est pas
+
         client.user.setActivity(`.help`, { type: 'WATCHING' })
 
         console.log(chalk.cyan(`${client.user.tag} est désormais connecté !`));
