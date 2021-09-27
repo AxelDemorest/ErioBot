@@ -45,7 +45,26 @@ module.exports = {
 
                         const newNeeded = getNeededXP(needed);
 
-                        message.channel.send(`<a:a_BlueArrow:889566187925680138> **Félicitation ${message.author}, tu es passé au niveau** \`${level}\` !`);
+                        const guild_message = await client.db.asyncQuery(`SELECT * FROM guilds WHERE guild_id = ${message.guild.id}`).catch(console.error);
+
+                        let replaceMessageLevelUp;
+                    
+                        if (guild_message[0].messageLevelUp) {
+                            replaceMessageLevelUp = guild_message[0].messageLevelUp.replace(/{(pseudo|mention|level)}/gmi, (_, match) => {
+                                switch (match) {
+                                    case 'pseudo':
+                                        return message.author.tag;
+
+                                    case 'mention':
+                                        return message.author;
+
+                                    case 'level':
+                                        return level;
+                                }
+                            });
+                        }
+
+                        message.channel.send(guild_message[0].messageLevelUp ? replaceMessageLevelUp : `<:add_erio:892011328150065203> **Congratulations ${message.author}, you are now at level \`${level}\` !**`);
 
                         await client.db.query("UPDATE leveling_users SET xp = ?, xp_needed = ?, level = ? WHERE guild_id = ? AND user_id = ?", [0, newNeeded, level, message.guild.id, message.author.id], (error, rows) => { if (error) throw error });
 
