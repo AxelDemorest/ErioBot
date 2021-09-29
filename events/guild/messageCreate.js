@@ -8,6 +8,10 @@ module.exports = {
 
         // leveling system
 
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
         function getNeededXP(neededXP) {
             return Math.floor((1.08 * neededXP) + 100);
         }
@@ -66,7 +70,7 @@ module.exports = {
 
                         const channel = message.guild.channels.cache.get(guild_data[0].channelLevelUpMessage) || message.channel;
 
-                        channel.send(guild_data[0].messageLevelUp ? replaceMessageLevelUp : `<:add_erio:892011328150065203> **Congratulations ${message.author}, you are now at level \`${level}\` !**`);
+                        channel.send(guild_data[0].messageLevelUp ? capitalizeFirstLetter(replaceMessageLevelUp) : `<:add_erio:892011328150065203> **Congratulations ${message.author}, you are now at level \`${level}\` !**`);
 
                         await client.db.query("UPDATE leveling_users SET xp = ?, xp_needed = ?, level = ? WHERE guild_id = ? AND user_id = ?", [0, newNeeded, level, message.guild.id, message.author.id], (error, rows) => { if (error) throw error });
 
