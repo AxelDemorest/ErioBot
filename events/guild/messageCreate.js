@@ -51,6 +51,12 @@ module.exports = {
 
                         const guild_data = await client.db.asyncQuery(`SELECT * FROM guilds WHERE guild_id = ${message.guild.id}`).catch(console.error);
 
+                        if (guild_data[0].rolesRewards) {
+                            const object = JSON.parse(guild_data[0].rolesRewards);
+
+                            if(object[level]) message.member.roles.add(object[level]);
+                        }
+
                         let replaceMessageLevelUp;
                     
                         if (guild_data[0].messageLevelUp) {
