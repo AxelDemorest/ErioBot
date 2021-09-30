@@ -7,6 +7,12 @@ module.exports = {
     category: "Leveling",
     clientPermissions: ['EMBED_LINKS'],
     userPermissions: ['ADMINISTRATOR'],
+    exemples: [
+        'rewards add @role',
+        'rewards edit @role',
+        'rewards delete @role',
+        'rewards list',
+    ],
     async execute(client, message, args) {
 
         function getKeyByValue(object, value) {
@@ -97,10 +103,27 @@ module.exports = {
                 break;
 
             case 'list':
+
+                let rewardsList = '';
+
+                for (const property in object) {
+                    rewardsList += `\n・**Level __${property}__** : ${message.guild.roles.cache.get(object[property])}`
+                }
+
+                message.channel.send({
+                    embeds: [
+                        new MessageEmbed()
+                            .setColor("#70D9F3")
+                            .setTitle("Reward's list")
+                            .setDescription(rewardsList)
+                            .setFooter(client.user.username, client.user.avatarURL())
+                            .setTimestamp()
+                    ]
+                })
                 break;
 
             default:
-                message.channel.send({ embeds: [client.util.errorMsg(message.author, `Please provide a parameter.\n\n**Parameters:** \`add\` | \`edit\` | \`delete\` | \`list\`\n\n**Examples:**\n\`\`\`js\n${this.exemples.join("\n")}\`\`\``)] });
+                message.channel.send({ embeds: [client.util.errorMsg(message.author, `Please provide a parameter.\n\n**Parameters:** \`add\` | \`edit\` | \`delete\` | \`list\`\n\n**Examples:**\n\`\`\`\n${this.exemples.join("\n")}\`\`\``)] });
         }
 
 
