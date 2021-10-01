@@ -4,7 +4,7 @@ const errorMsg = (user, description, usage = false) => {
         author: {
             name: "We have encountered an error",
         },
-        description: `・<:cross_error:886004482645843999>︰${description}${!usage ? "" : `\n\n**Usage**︰\`${usage}\``}`,
+        description: `・<:removeErio:893531436903186432>︰${description}${!usage ? "" : `\n\n**Usage**︰\`${usage}\``}`,
         footer: {
             text: `Executed by ${user.tag}`,
             icon_url: user.avatarURL(),
@@ -18,7 +18,7 @@ const successMsg = (user, description) => {
         author: {
             name: "Success!",
         },
-        description: `・<:check_success:886004482570330192>︰${description}`,
+        description: `・<:checkErio:893531436685074503>︰${description}`,
         footer: {
             text: `Executed by ${user.tag}`,
             icon_url: user.avatarURL(),
